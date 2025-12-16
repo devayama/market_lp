@@ -1,0 +1,545 @@
+/* --- Global Styles --- */
+:root {
+    --primary-color: #0066cc;   /* Professional Blue */
+    --primary-dark: #0052a3;    
+    --accent-dark: #1c2a48;     
+    --background-color: #ffffff;
+    --light-gray: #f4f6f9;      
+    --border-color: #dee2e6;    
+    --text-color: #333333;
+    --text-light: #666666;      
+    --button-text: #ffffff;
+    --max-width: 1200px;
+}
+
+html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* --- DYNAMIC FONTS based on Language --- */
+body {
+    /* DEFAULT (English): SF Pro feel */
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Inter", sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+/* JAPANESE MODE: Hiragino Kaku Gothic */
+html[lang="ja"] body {
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "BIZ UDPGothic", "Meiryo", sans-serif;
+}
+
+/* CHINESE MODE: PingFang SC */
+html[lang="zh"] body {
+    font-family: "PingFang SC", "Microsoft YaHei", "微软雅黑", "STHeiti", "SimHei", sans-serif;
+}
+
+a { text-decoration: none; color: var(--primary-color); transition: color 0.3s; }
+a:hover { color: var(--primary-dark); }
+.container { width: 90%; max-width: var(--max-width); margin: 0 auto; padding: 20px 0; }
+h1, h2, h3 { font-weight: 700; margin-bottom: 20px; color: var(--text-color); }
+h2 { font-size: 2.5rem; }
+
+/* --- Buttons --- */
+.button-primary {
+    display: inline-block; 
+    padding: 12px 25px; 
+    background: var(--primary-color);
+    color: #ffffff !important; /* FORCE WHITE TEXT */
+    border: none; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    font-weight: 600; 
+    font-size: 0.85rem; 
+    transition: all 0.3s ease; 
+    border-radius: 4px;
+    text-decoration: none; /* No underline */
+}
+
+.button-primary:hover { 
+    background: var(--primary-dark); 
+    color: #ffffff !important; /* Keep white on hover */
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2); 
+}
+
+.button-outline {
+    display: inline-block; 
+    padding: 10px 20px; 
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color); 
+    font-weight: 600; 
+    text-transform: uppercase; 
+    font-size: 0.8rem;
+    transition: all 0.3s ease; 
+    border-radius: 4px; 
+    background: transparent;
+    text-decoration: none;
+}
+
+.button-outline:hover { 
+    background: var(--primary-color); 
+    color: #ffffff !important; /* Turn white on hover */
+}
+
+/* --- Header Button Spacing --- */
+.desktop-nav .button-outline { margin-left: 40px; }
+.desktop-nav .button-primary { margin-left: 15px; }
+
+/* --- UNIFIED HEADER --- */
+.header-main {
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+    width: 100%;
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+    transition: box-shadow 0.3s ease;
+}
+
+.header-main.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
+    border-bottom: 1px solid transparent; 
+}
+
+/* --- FIXED HEADER HEIGHT --- */
+.nav-container { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 0;        /* Reduced padding slightly since min-height handles the size */
+    min-height: 70px;       /* Forces consistency across all pages */
+}
+.logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
+
+/* --- DESKTOP NAVIGATION (Alignment Fix Added Here) --- */
+.desktop-nav {
+    display: flex;
+    align-items: center; /* Forces vertical centering */
+    height: 100%;
+}
+
+.desktop-nav a { 
+    margin-left: 30px; 
+    font-size: 0.95rem; 
+    font-weight: 600; 
+    color: var(--text-color); 
+    display: flex;       /* Ensures text inside links is centered */
+    align-items: center;
+}
+.desktop-nav a:hover { color: var(--primary-color); }
+.desktop-nav .button-outline { margin-left: 40px; }
+.desktop-nav .button-primary { margin-left: 15px; }
+
+.hamburger-btn {
+    display: none; 
+    background: none; border: none; font-size: 1.8rem; 
+    color: var(--primary-color); cursor: pointer;
+}
+
+/* --- Language Dropdown (Modern & Aligned) --- */
+.lang-dropdown { 
+    position: relative; 
+    margin-left: 20px; 
+    display: flex;        /* Fixes container height */
+    align-items: center;  /* Centers button vertically */
+}
+
+.lang-btn-current {
+    background: transparent; border: 1px solid transparent; cursor: pointer;
+    display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+    border-radius: 20px; transition: all 0.3s ease; color: var(--text-color); font-size: 0.9rem; font-weight: 600;
+    line-height: 1; /* Removes extra text spacing for perfect alignment */
+}
+.lang-btn-current:hover { background-color: var(--light-gray); }
+.flag-icon { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; border: 1px solid #eee; }
+.arrow-down { font-size: 0.6rem; color: var(--text-light); transition: transform 0.3s; }
+
+.lang-menu {
+    position: absolute; top: 100%; right: 0; width: 140px;
+    background: #fff; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-color); padding: 5px;
+    opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1100;
+}
+.lang-dropdown:hover .lang-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.lang-dropdown:hover .arrow-down { transform: rotate(180deg); }
+
+.lang-option {
+    display: flex; align-items: center; gap: 10px; padding: 10px 15px;
+    cursor: pointer; border-radius: 6px; font-size: 0.9rem; color: var(--text-color); transition: background 0.2s;
+}
+.lang-option:hover { background-color: var(--light-gray); color: var(--primary-color); }
+
+/* --- Mobile Menu --- */
+.mobile-menu-dropdown {
+    display: block; position: absolute; top: 100%; left: 0; width: 100%;
+    background-color: #fff; border-bottom: 1px solid var(--border-color);
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+}
+.mobile-menu-dropdown.menu-open { max-height: 400px; }
+.mobile-menu-dropdown a {
+    display: block; padding: 12px 20px; border-bottom: 1px solid var(--light-gray);
+    color: var(--text-color); font-size: 0.9rem; font-weight: 600;
+}
+.mobile-menu-dropdown a:hover { color: var(--primary-color); background-color: var(--light-gray); }
+.mobile-menu-dropdown .mobile-book-btn { background-color: var(--primary-color); color: #fff; text-align: center; }
+
+/* Mobile Language Row */
+.mobile-lang-row {
+    display: flex; justify-content: center; gap: 12px; 
+    margin-top: 35px; padding-top: 20px; padding-bottom: 25px; border-top: 1px solid var(--border-color);
+}
+.mobile-lang-btn {
+    display: flex; align-items: center; gap: 6px; background: #fff;
+    border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 20px;
+    font-size: 0.85rem; color: var(--text-color); cursor: pointer;
+}
+.mobile-lang-btn .flag-icon { width: 16px; height: 16px; }
+.mobile-lang-btn.active { background: var(--primary-color); color: #fff; border-color: var(--primary-color); }
+
+/* --- Hero Section --- */
+.hero-section { text-align: center; padding: 80px 0 50px; background-color: var(--light-gray); }
+.hero-title { font-size: 3.5rem; text-transform: uppercase; max-width: 800px; margin: 0 auto 30px; line-height: 1.1; color: var(--text-color); }
+.hero-image-container { width: 100%; overflow: hidden; margin-top: 50px;}
+.hero-image { 
+    width: 70%; height: auto; display: block; margin: 0 auto; 
+    box-shadow: 0 20px 40px rgba(0, 102, 204, 0.15); border-radius: 8px;
+}
+
+/* --- Scroll Animations --- */
+.animate-on-scroll {
+    opacity: 0; transform: scale(0.95) translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.animate-on-scroll.is-visible { opacity: 1; transform: scale(1) translateY(0); }
+
+/* --- About Section --- */
+.about-section { padding: 100px 0; }
+.about-grid { display: flex; gap: 60px; align-items: center; }
+.about-image-stack, .about-text-content { flex: 1; }
+.about-image-stack img { max-width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+.about-text-content { padding-left: 20px; }
+.about-text-content p { margin-bottom: 30px; color: var(--text-light); }
+.about-text-content h3 { color: var(--primary-color); }
+
+/* --- PARTNERS SECTION --- */
+.partners-section { padding: 80px 0; text-align: center; background-color: var(--light-gray); }
+.partners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-top: 50px;}
+.partner-card { 
+    background: #fff; padding: 40px 30px; border-radius: 12px; text-align: center; 
+    transition: all 0.3s ease; border: 1px solid var(--border-color);
+}
+.partner-card:hover { 
+    transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 102, 204, 0.1); border-color: var(--primary-color);
+}
+.partner-logo-box { height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; }
+.partner-card h3 { font-size: 1.2rem; margin-bottom: 15px; }
+.partner-card p { font-size: 0.9rem; color: var(--text-light); }
+.hidden-for-now { display: none !important; }
+
+/* --- Services & Plans Grid --- */
+.services-section, .plans-section { padding: 100px 0; text-align: center; }
+.services-section { background-color: #fff; }
+.plans-section { background-color: var(--light-gray); }
+
+.services-grid, .plans-grid { 
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; margin-top: 60px; 
+}
+
+.service-card, .plan-card { 
+    text-align: left; background: #fff; border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--border-color); transition: all 0.3s ease;
+    display: flex; flex-direction: column;
+    height: 100%; /* Make cards fill grid height */
+}
+.service-card:hover, .plan-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+.service-card { padding: 30px; }
+
+.service-card img { width: 100%; height: auto; margin-bottom: 25px; border-radius: 8px;}
+.service-card h3, .plan-card h3 { font-size: 1.3rem; margin-bottom: 15px;}
+.plan-card h3 { padding: 0 30px; }
+.price { font-size: 2rem; font-weight: 700; margin-bottom: 5px; color: var(--primary-color); }
+.frequency { margin-bottom: 20px; color: var(--text-light); font-size: 0.9rem; }
+.description { color: var(--text-light); margin-bottom: 30px; flex-grow: 1;}
+.plan-card .description, .plan-card .price, .plan-card .frequency { padding-left: 30px; padding-right: 30px; }
+
+/* Push button to bottom of card */
+.plan-card a { 
+    margin: 0 30px 30px !important; 
+    margin-top: auto !important; /* Push to bottom */
+}
+
+/* --- Appointment Section --- */
+.appointment-section { padding: 100px 0; background-color: #fff;}
+.appointment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.appointment-text-content { order: 1; }
+.appointment-text-content p { color: var(--text-light); margin-bottom: 30px; }
+.appointment-text-content strong { color: var(--primary-color); }
+.appointment-booking { 
+    order: 3; background: #fff; padding: 40px; border-radius: 12px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid var(--border-color);
+}
+.appointment-image { grid-column: 1 / 2; grid-row: 1 / 3; order: 2; }
+.appointment-image img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 12px; }
+input, select { 
+    width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); 
+    border-radius: 4px; font-family: inherit; font-size: 1rem;
+    transition: border-color 0.3s;
+}
+input:focus, select:focus { outline: none; border-color: var(--primary-color); }
+
+/* --- Footer --- */
+.footer { background-color: var(--accent-dark); padding: 60px 0; font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+.footer-content { display: flex; justify-content: space-between; gap: 30px; }
+.footer-block h3 { font-size: 1.1rem; margin-bottom: 20px; color: #fff; }
+.footer-block p { margin-bottom: 10px; }
+.footer a { color: rgba(255,255,255,0.8); }
+.footer a:hover { color: #fff; }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+    .hero-title { font-size: 2.5rem; }
+    .hero-image { width: 90%; }
+    .desktop-nav { display: none; }
+    .hamburger-btn { display: block; }
+    .about-grid { flex-direction: column; text-align: center; gap: 40px;}
+    .about-text-content { padding-left: 0; }
+    .services-grid, .plans-grid { grid-template-columns: 1fr; } 
+    .appointment-grid { grid-template-columns: 1fr; gap: 40px;}
+    .appointment-image { order: 1; grid-column: 1 / 2; grid-row: auto; height: 300px; }
+    .appointment-text-content { order: 2; }
+    .appointment-booking { order: 3; max-width: 100%; }
+    .footer-content { flex-direction: column; text-align: center; }
+}
+
+/* --- Fix for Price Tax Note --- */
+.price {
+    display: flex;           /* Use flexbox to organize vertical layout */
+    flex-direction: column;  /* Stack items vertically */
+    justify-content: center; /* Center them */
+    height: auto;            /* Allow height to grow */
+    line-height: 1.1;        /* Tighten spacing */
+}
+
+/* This targets the (tax incl.) / (税込) text */
+.price span {
+    display: block;          /* Forces it to a new line */
+    font-size: 0.8rem !important; /* Force smaller size (overrides inline styles) */
+    font-weight: 400;        /* Make it regular weight, not bold */
+    margin-top: 5px;         /* Add a little space between price and tax */
+    color: var(--text-light); /* Make it grey so the main price stands out */
+}
+
+/* --- Fix Confirmation Checkbox Alignment --- */
+.appointment-booking label {
+    display: flex;          /* Use Flexbox */
+    flex-direction: row;    /* Force row direction (side-by-side) */
+    align-items: center;    /* Center vertically */
+    justify-content: flex-start; /* Align to the LEFT */
+    gap: 12px;              /* Space between box and text */
+    cursor: pointer;
+    font-size: 0.95rem;     
+    margin-bottom: 25px;
+    width: 100%;            /* Ensure container takes full width */
+}
+
+.appointment-booking input[type="checkbox"] {
+    width: 20px;            /* Make checkbox standard size */
+    height: 20px;
+    margin: 0;              /* Remove any default margins that push it */
+    cursor: pointer;
+    flex-shrink: 0;         /* Prevent checkbox from squishing */
+}
+
+/* --- UNIVERSAL CHECKBOX FIX --- */
+.confirm-label {
+    display: flex !important;       /* Force Flexbox */
+    flex-direction: row !important; /* Force Side-by-Side */
+    align-items: center;            /* Center vertically */
+    justify-content: flex-start;    /* Align Left */
+    gap: 12px;                      /* Space between box and text */
+    width: 100%;
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+
+.confirm-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0; /* Remove default margins */
+    flex-shrink: 0; /* Prevent box from squishing */
+}
+
+/* --- Form Layout Fixes --- */
+
+/* 1. Force Label to be ON TOP of the input */
+.form-group {
+    display: flex;
+    flex-direction: column; /* Vertical stack */
+    align-items: stretch;   /* Stretch inputs to full width */
+    gap: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* 2. Styling the Textarea to be "Semi-Static" */
+textarea {
+    width: 100%;
+    height: 180px; /* Sets a fixed, large height like the screenshot */
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: inherit; /* Ensures it uses your site's font */
+    font-size: 1rem;
+    
+    /* Allow user to resize height only, but keep the width fixed */
+    resize: vertical; 
+}
+
+/* Ensure inputs focus nicely */
+textarea:focus, input:focus, select:focus { 
+    outline: none; 
+    border-color: var(--primary-color); 
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1); /* Subtle blue glow */
+}
+
+/* --- Form Layout: Side-by-Side Rows --- */
+.form-row {
+    display: flex;
+    gap: 20px; /* Space between the two columns */
+    width: 100%;
+}
+
+.form-row .form-group {
+    flex: 1; /* Forces both inputs to be equal width */
+    width: 100%;
+}
+
+/* On Mobile, stack them back to 1 column so they aren't too small */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/* --- Phone Input Library Styling --- */
+.iti {
+    width: 100%; /* Force library container to fill the form column */
+}
+
+/* Ensure dropdown doesn't get hidden */
+.iti__country-list {
+    z-index: 100 !important;
+}
+
+/* --- Logo Image Styling --- */
+.logo {
+    display: flex;       /* Removes extra space below image */
+    align-items: center; /* Centers it vertically */
+    text-decoration: none;
+}
+
+.logo img {
+    height: 40px;        /* Adjust this number to make it bigger/smaller */
+    width: auto;         /* Keeps the aspect ratio correct */
+    object-fit: contain; /* Ensures it never looks squished */
+}
+
+/* --- Comparison Table Styles --- */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    min-width: 600px; /* Ensures it doesn't get too squished on mobile */
+}
+
+.comparison-table th, .comparison-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-table th:first-child, .comparison-table td:first-child {
+    text-align: left;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.comparison-table th {
+    background-color: var(--light-gray);
+    font-size: 1.1rem;
+}
+
+.comparison-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* On very small screens, allow scrolling */
+@media (max-width: 600px) {
+    section.container { overflow-x: auto; }
+}
+
+/* --- ENCHANTED PLANS GRID (Mini Cards for Index) --- */
+
+/* The Card Container (Link) */
+.plan-card-mini {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 16px; /* Softer, rounder corners */
+    overflow: hidden;    /* Keeps the header inside the round corners */
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Subtle shadow */
+    border: 1px solid var(--border-color);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth physics */
+    height: 100%;
+}
+
+/* Hover Effect: Lift up and cast bigger shadow */
+.plan-card-mini:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 30px rgba(0, 102, 204, 0.15);
+    border-color: var(--primary-color);
+}
+
+/* The Colored Top Bar */
+.plan-header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+}
+
+/* The Content Area */
+.plan-body {
+    padding: 30px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.plan-body h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+/* Special Price Styling for Index */
+.plan-card-mini .price {
+    font-size: 1.8rem;
+    margin: 0;
+    align-items: center; /* Center the (tax excl) text */
+}
+
+/* Optional: Make the PRO card pop a bit more by default */
+/* .plan-card-mini.featured {
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 20px rgba(0, 102, 204, 0.1);
+} */

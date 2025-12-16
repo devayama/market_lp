@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M&Associates Orthodontic Group</title>
+    <link rel="stylesheet" href="css/index-style.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+    <style>
+        .lang-dropdown { 
+            position: relative; 
+            margin-left: 20px; 
+            display: flex;
+            align-items: center;
+        }
+
+        .lang-btn-current {
+            background: transparent; 
+            border: 1px solid transparent; 
+            cursor: pointer;
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            padding: 8px 12px;
+            border-radius: 20px; 
+            transition: all 0.3s ease; 
+            color: var(--text-color); 
+            font-size: 0.9rem; 
+            font-weight: 600;
+            line-height: 1;
+        }
+        .lang-btn-current:hover { 
+            background-color: var(--light-gray); 
+        }
+        .flag-icon { 
+            width: 20px; 
+            height: 20px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 1px solid #eee; 
+        }
+        .arrow-down { 
+            font-size: 0.6rem; 
+            color: var(--text-light); 
+            transition: transform 0.3s; 
+        }
+
+        .lang-menu {
+            position: absolute; 
+            top: 100%; 
+            right: 0; 
+            width: 140px;
+            background: #fff; 
+            border-radius: 8px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color); 
+            padding: 5px;
+            opacity: 0; 
+            visibility: hidden; 
+            transform: translateY(10px); 
+            transition: all 0.3s ease; 
+            z-index: 1100;
+        }
+        .lang-dropdown:hover .lang-menu { 
+            opacity: 1; 
+            visibility: visible; 
+            transform: translateY(0); 
+        }
+        .lang-dropdown:hover .arrow-down { 
+            transform: rotate(180deg); 
+        }
+
+        .lang-option {
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            padding: 10px 15px;
+            cursor: pointer; 
+            border-radius: 6px; 
+            font-size: 0.9rem; 
+            color: var(--text-color); 
+            transition: background 0.2s;
+        }
+        .lang-option:hover { 
+            background-color: var(--light-gray); 
+            color: var(--primary-color); 
+        }
+
+        /* Mobile language dropdown styling */
+        .mobile-lang-dropdown {
+            position: relative;
+            padding: 15px;
+        }
+        .mobile-lang-dropdown .lang-btn-current {
+            color: var(--text-color);
+            justify-content: center;
+            width: 100%;
+        }
+        .mobile-lang-dropdown .arrow-down {
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-main">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span style="font-weight: 800; font-size: 1.4rem; color: var(--primary-color);">M&Associates</span>
+            </a>
+            <nav class="desktop-nav">
+                <a href="#about" data-i18n="nav.about">About Group</a>
+                <a href="#locations" data-i18n="nav.locations">Locations</a>
+                <a href="#contact" class="button-primary" data-i18n="nav.inquiry">Group Inquiry</a>
+                <div class="lang-dropdown">
+                    <button class="lang-btn-current">
+                        <img src="https://flagcdn.com/w40/jp.png" alt="日本語" class="flag-icon" id="currentFlag">
+                        <span id="currentLangLabel">日本語</span>
+                        <span class="arrow-down">▼</span>
+                    </button>
+                    <div class="lang-menu">
+                        <div class="lang-option" data-lang="ja">
+                            <img src="https://flagcdn.com/w40/jp.png" alt="日本語" class="flag-icon">
+                            <span>日本語</span>
+                        </div>
+                        <div class="lang-option" data-lang="en">
+                            <img src="https://flagcdn.com/w40/us.png" alt="English" class="flag-icon">
+                            <span>English</span>
+                        </div>
+                        <div class="lang-option" data-lang="zh">
+                            <img src="https://flagcdn.com/w40/cn.png" alt="中文" class="flag-icon">
+                            <span>中文</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()">&#9776;</button>
+        </div>
+
+        <nav class="mobile-menu-dropdown" id="mobileMenu">
+            <a href="#about" onclick="toggleMobileMenu()" data-i18n="nav.about">About Group</a>
+            <a href="#locations" onclick="toggleMobileMenu()" data-i18n="nav.locations">Locations</a>
+            <a href="#contact" onclick="toggleMobileMenu()" data-i18n="nav.inquiry">Group Inquiry</a>
+            <div class="mobile-lang-dropdown lang-dropdown">
+                <button class="lang-btn-current">
+                    <img src="https://flagcdn.com/w40/jp.png" alt="日本語" class="flag-icon" id="currentFlagMobile">
+                    <span id="currentLangLabelMobile">日本語</span>
+                    <span class="arrow-down">▼</span>
+                </button>
+                <div class="lang-menu">
+                    <div class="lang-option mobile-lang-option" data-lang="ja">
+                        <img src="https://flagcdn.com/w40/jp.png" alt="日本語" class="flag-icon">
+                        <span>日本語</span>
+                    </div>
+                    <div class="lang-option mobile-lang-option" data-lang="en">
+                        <img src="https://flagcdn.com/w40/us.png" alt="English" class="flag-icon">
+                        <span>English</span>
+                    </div>
+                    <div class="lang-option mobile-lang-option" data-lang="zh">
+                        <img src="https://flagcdn.com/w40/cn.png" alt="中文" class="flag-icon">
+                        <span>中文</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="container hero-content">
+            <h1 class="hero-title" data-i18n="hero.title">World-Class Orthodontics in Japan</h1>
+            <p style="margin-bottom: 30px; font-size: 1.2rem; color: var(--text-light);">
+                <span data-i18n="hero.subtitle1">One Philosophy. Five Major Cities.</span><br>
+                <span data-i18n="hero.subtitle2">Find the M&Associates specialist nearest to you.</span>
+            </p>
+
+            <div class="hero-image-container" style="margin-top: 40px;">
+                <img src="https://placehold.co/1000x500/f4f6f9/0066cc?text=M%26A+Group+Japan" alt="Japan Map Concept" class="hero-image">
+            </div>
+        </div>
+    </section>
+
+    <section id="locations" class="plans-section animate-on-scroll">
+        <div class="container">
+            <h2 data-i18n="locations.title">Select Your Clinic</h2>
+            <p style="color: var(--text-light); margin-bottom: 40px;" data-i18n="locations.subtitle">Direct access to our regional specialist sites.</p>
+            
+            <div class="plans-grid">
+                
+                <a href="clinics/tokyo-ma.html" class="plan-card-mini">
+                    <div class="plan-header" style="background-color: var(--primary-color); color: #fff;">TOKYO</div>
+                    <div class="plan-body">
+                        <h3>M&A Tokyo</h3>
+                        <p style="color: #666;">Ginza, Chuo-ku</p>
+                        <span class="button-outline" style="margin-top:15px; border:none; padding:0; font-size:0.8rem;" data-i18n="locations.viewSite">View Site &rarr;</span>
+                    </div>
+                </a>
+
+                <a href="clinics/nagoya-ma.html" class="plan-card-mini">
+                    <div class="plan-header" style="background-color: var(--accent-dark); color: #fff;">NAGOYA</div>
+                    <div class="plan-body">
+                        <h3>M&A Nagoya</h3>
+                        <p style="color: #666;">Sakae, Naka-ku</p>
+                        <span class="button-outline" style="margin-top:15px; border:none; padding:0; font-size:0.8rem;" data-i18n="locations.viewSite">View Site &rarr;</span>
+                    </div>
+                </a>
+
+                <a href="clinics/osaka-ma.html" class="plan-card-mini">
+                    <div class="plan-header" style="background-color: var(--primary-color); color: #fff;">OSAKA</div>
+                    <div class="plan-body">
+                        <h3>M&A Osaka</h3>
+                        <p style="color: #666;">Umeda, Kita-ku</p>
+                        <span class="button-outline" style="margin-top:15px; border:none; padding:0; font-size:0.8rem;" data-i18n="locations.viewSite">View Site &rarr;</span>
+                    </div>
+                </a>
+
+                <a href="clinics/hokkaido-ma.html" class="plan-card-mini">
+                    <div class="plan-header" style="background-color: var(--accent-dark); color: #fff;">HOKKAIDO</div>
+                    <div class="plan-body">
+                        <h3>M&A Sapporo</h3>
+                        <p style="color: #666;">Chuo-ku, Sapporo</p>
+                        <span class="button-outline" style="margin-top:15px; border:none; padding:0; font-size:0.8rem;" data-i18n="locations.viewSite">View Site &rarr;</span>
+                    </div>
+                </a>
+
+                <a href="clinics/fukuoka-ma.html" class="plan-card-mini">
+                    <div class="plan-header" style="background-color: var(--primary-color); color: #fff;">FUKUOKA</div>
+                    <div class="plan-body">
+                        <h3>M&A Fukuoka</h3>
+                        <p style="color: #666;">Tenjin, Chuo-ku</p>
+                        <span class="button-outline" style="margin-top:15px; border:none; padding:0; font-size:0.8rem;" data-i18n="locations.viewSite">View Site &rarr;</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section animate-on-scroll">
+        <div class="container about-grid">
+            <div class="about-image-stack">
+                <img src="https://placehold.co/500x600/f4f6f9/0066cc?text=Group+Philosophy" alt="Doctors Meeting">
+            </div>
+            <div class="about-text-content">
+                <h2 data-i18n="about.title">The M&Associates Standard</h2>
+                <p>
+                    <strong data-i18n="about.protocol.title">Unified Protocol:</strong> <br>
+                    <span data-i18n="about.protocol.text">Regardless of which city you visit, our digital records and treatment protocols are standardized across the group.</span>
+                </p>
+                <p>
+                    <strong data-i18n="about.transfer.title">Transfer Support:</strong> <br>
+                    <span data-i18n="about.transfer.text">Moving from Tokyo to Osaka? Your treatment continues seamlessly. We share patient data securely within our private network.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="appointment-section animate-on-scroll">
+        <div class="container appointment-grid">
+            <div class="appointment-text-content">
+                <h2 data-i18n="contact.title">Group Inquiries</h2>
+                <p data-i18n="contact.description">For B2B partnerships, recruitment, or media inquiries regarding the M&Associates group.</p>
+                <p><em data-i18n="contact.note">*For patient appointments, please select a specific clinic above.</em></p>
+            </div>
+            
+            <div class="appointment-booking">
+                <h3 data-i18n="contact.formTitle">Contact Head Office</h3>
+                <form>
+                    <div class="form-group">
+                        <input type="text" data-i18n-placeholder="contact.placeholders.name" placeholder="Company / Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" data-i18n-placeholder="contact.placeholders.email" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea data-i18n-placeholder="contact.placeholders.message" placeholder="How can we help?"></textarea>
+                    </div>
+                    <button type="submit" class="button-primary" style="width:100%;" data-i18n="contact.sendButton">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-block">
+                <h3>M&Associates</h3>
+                <p data-i18n="footer.groupName">Japan Orthodontic Group</p>
+            </div>
+            <div class="footer-block">
+                <h3 data-i18n="footer.headquarters">Headquarters</h3>
+                <p>Tokyo, Japan</p>
+            </div>
+            <div class="footer-block">
+                <h3 data-i18n="footer.links">Links</h3>
+                <p><a href="#locations" data-i18n="nav.locations">Locations</a></p>
+                <p><a href="#contact" data-i18n="nav.contact">Contact</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/index-script.js"></script>
+
+</body>
+</html>

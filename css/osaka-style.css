@@ -1,0 +1,440 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  gap: 15px;
+}
+
+a {
+  display: block;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+/* Desktop: fixed 450px width */
+@media (min-width: 768px) {
+  a {
+    width: 450px;
+  }
+}
+
+.map-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  transform: translate(-50%, -50%);
+  height: 250px;
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+a.image-with-map {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 430px;
+  transform: scale(0.9);
+  transform-origin: top center;
+  /* This negative margin compensates for the space created by the scale transform,
+       pulling the next element up to remove the white gap. */
+  margin-bottom: -10%;
+}
+a.image-with-video {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 430px;
+}
+
+/* Overlay buttons on other images */
+a.image-with-overlay {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 430px;
+}
+
+/* Image 8 - no special margin needed */
+
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  pointer-events: auto;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 37.8% 0 19.2% 0;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* Clickable areas for image 2 */
+.image-with-clickable-areas {
+  position: relative;
+}
+
+.clickable-area {
+  position: absolute;
+  cursor: pointer;
+  z-index: 30;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 90%; 
+  height: auto;
+  aspect-ratio: 5.4 / 1;
+  /* Debug mode: red rectangle border */
+  /* border: 3px solid red;
+  box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3); */
+}
+
+/* LINE button area - using percentages to scale with image */
+/* Buttons for image 2 - adjust independently */
+.area-line-2 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 17.5%;
+  width: 90%;
+  background-image: url('../assets/button/Button LINE N.png');
+}
+
+/* Call button area-2 */
+.area-call-2 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 9.5%;
+  width: 90%;
+  background-image: url('../assets/button/Button Call N.png');
+}
+
+/* Buttons for image 5 - adjust independently */
+.area-line-5 {
+  left: 50%;
+  transform: translateX(-50%);;
+  bottom: 4.9%;
+  width: 90%;
+  background-image: url('../assets/button/Button LINE N.png');
+}
+
+.area-call-5 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 2.5%;
+  width: 90%;
+  background-image: url('../assets/button/Button Call N.png');
+}
+
+/* Buttons for image 6 - adjust independently */
+.area-line-6 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 3%;
+  width: 90%;
+  background-image: url('../assets/button/Button LINE N.png');
+}
+
+.area-call-6 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1.5%;
+  width: 90%;
+  background-image: url('../assets/button/Button Call N.png');
+}
+
+/* Interactive map overlay for image 7 - scales with image */
+.map-overlay-7 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 23%;
+  width: 80%;
+  height: 14.5%;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+/* Video overlay for image 3 - positioned from bottom */
+.video-overlay-3 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0%;
+  width: 100%;
+  height: 33.5%;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.video-overlay-3 video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Buttons for image 8 - adjust independently */
+.area-line-8 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 7.6%;
+  width: 90%;
+  background-image: url('../assets/button/Button LINE N.png');
+}
+
+.area-call-8 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 3.8%;
+  width: 90%;
+  background-image: url('../assets/button/Button Call N.png');
+}
+
+/* Buttons for image 9 - adjust independently */
+.area-line-9 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10%;
+  width: 90%;
+  background-image: url('../assets/button/Button LINE N.png');
+}
+
+.area-call-9 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 5.6%;
+  width: 90%;
+  background-image: url('../assets/button/Button Call N.png');
+}
+
+/* Buttons for image 10 - adjust independently */
+.area-line-10 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 2.3%;
+  width: 90%;
+  background-image: url('../assets/button/Button LINE N.png');
+}
+
+.area-call-10 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1.1%;
+  width: 90%;
+  background-image: url('../assets/button/Button Call N.png');
+}
+
+/* Buttons for image 12 - adjust independently */
+.area-line-12 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 7.5%;
+  width: 90%;
+  background-image: url('../assets/button/Button LINE N.png');
+}
+
+.area-call-12 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 3.7%;
+  width: 90%;
+  background-image: url('../assets/button/Button Call N.png');
+}
+
+/* Buttons for image 13-top - adjust independently */
+.area-line-13-top {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 14.5%;
+  width: 95%;
+  background-image: url('../assets/button/Button LINE S.png');
+}
+
+.area-call-13-top {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 18.5%;
+  width: 95%;
+  background-image: url('../assets/button/Button Call S.png');
+}
+
+/* Buttons for image 13-bottom - adjust independently */
+.area-line-13-bottom {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 8%;
+  width: 90%;
+  background-image: url('../assets/button/Button LINE N.png');
+}
+
+.area-call-13-bottom {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 3.9%;
+  width: 90%;
+  background-image: url('../assets/button/Button Call N.png');
+}
+
+/* Buttons for image 14 - adjust independently */
+.area-line-14 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 6.3%;
+  width: 90%;
+  background-image: url('../assets/button/Button LINE N.png');
+}
+
+.area-call-14 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 3.4%;
+  width: 90%;
+  background-image: url('../assets/button/Button Call N.png');
+}
+
+/* Buttons for image 15 - adjust independently */
+.area-line-15 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 3.2%;
+  width: 90%;
+  
+  background-image: url('../assets/button/Button LINE N.png');
+}
+
+.area-call-15 {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1.65%;
+  width: 90%;
+  
+  background-image: url('../assets/button/Button Call N.png');
+}
+
+/* Make overlay buttons a bit smaller on very small screens */
+/* @media (max-width: 430px) {
+  .overlay-buttons {
+    bottom: calc(100px - 5vw) !important;
+  }
+  a[data-image="13"] .overlay-buttons-2 {
+    top: calc(265px - 2vw) !important;
+  }
+} */
+
+/* Remove the scale on small devices so the map/image shows at full size */
+/* @media (max-width: 480px) {
+  a.image-with-map {
+    transform: none;
+    margin-bottom: 0;
+  }
+} */
+
+/* Placeholder absolute positions for buttons on `2.png` (adjust later) */
+.image-with-video .overlay-button {
+  /* place at fixed pixel offset from the bottom of the image (placeholder) */
+  bottom: 30px;
+  top: auto;
+}
+
+.image-with-video .overlay-button.button-line {
+  right: 30px;
+  left: auto;
+}
+
+.image-with-video .overlay-button.button-call {
+  left: 30px;
+  right: auto;
+}
+
+/* Individual image overlay button positioning (adjust bottom offset per image) */
+/* Image 5 */
+a[data-image="5"] .overlay-buttons {
+  bottom: 87px;
+}
+
+/* Image 6 */
+a[data-image="6"] .overlay-buttons {
+  bottom: 88px;
+}
+
+/* Image 8 */
+a[data-image="8"] .overlay-buttons {
+  bottom: 86px;
+}
+
+/* Image 9 */
+a[data-image="9"] .overlay-buttons {
+  bottom: 84px;
+}
+
+/* Image 10 */
+a[data-image="10"] .overlay-buttons {
+  bottom: 83px;
+}
+
+/* Image 12 */
+a[data-image="12"] .overlay-buttons {
+  bottom: 84px;
+}
+
+/* Image 13 */
+a[data-image="13"] .overlay-buttons {
+  bottom: 84px;
+}
+
+/* Image 13 - Second button group */
+a[data-image="13"] .overlay-buttons-2 {
+  bottom: auto;
+  top: 282px;
+}
+
+a[data-image="13"] .overlay-buttons-2 .overlay-button {
+  width: 90vw;
+}
+
+/* Image 14 */
+a[data-image="14"] .overlay-buttons {
+  bottom: 98px;
+}
+
+/* Image 15 */
+/* a[data-image="15"] .overlay-buttons {
+  bottom: 92px;
+} */
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.map-container {
+  position: absolute;
+  top: 350px;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  height: 250px;
+  z-index: 10;
+  pointer-events: none;
+}

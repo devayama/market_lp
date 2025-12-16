@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokyo MA</title>
+    <link rel="stylesheet" href="stlyle.css">
+</head>
+<body>
+    <a href="assets/tokyo/1.png"><img src="assets/tokyo/1.png" alt="Tokyo image 1"></a>
+    <a href="assets/tokyo/2.png" class="image-with-video">
+        <img src="assets/tokyo/2.png" alt="Tokyo image 2">
+        <div class="video-container">
+            <video src="assets/tokyo/video1.mp4" width="100%" height="100%" autoplay muted loop playsinline preload="auto"></video>
+        </div>
+        <div class="overlay-buttons">
+            <img class="overlay-button button-line" src="assets/tokyo/Button LINE N.png" alt="Line">
+            <img class="overlay-button button-call" src="assets/tokyo/Button Call.png" alt="Call">
+        </div>
+    </a>
+    <a href="assets/tokyo/3.png"><img src="assets/tokyo/3.png" alt="Tokyo image 3"></a>
+    <a href="assets/tokyo/4.png"><img src="assets/tokyo/4.png" alt="Tokyo image 4"></a>
+    <a href="assets/tokyo/5.png" class="image-with-overlay" data-image="5">
+        <img src="assets/tokyo/5.png" alt="Tokyo image 5">
+    </a>
+    <a href="assets/tokyo/6.png" class="image-with-overlay" data-image="6">
+        <img src="assets/tokyo/6.png" alt="Tokyo image 6">
+    </a>
+    <a href="assets/tokyo/7.png" class="image-with-map">
+        <img src="assets/tokyo/7.png" alt="Tokyo image 7">
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.662167347538!2d139.776342!3d35.6853196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601889569dcd9561%3A0xc2def01eeba0d2d3!2z5p2x5Lqs5pel5pys5qmL44Ko44Og44Ki44Oz44OJ44Ki44K944K344Ko44Kk44OE55-v5q2j5q2v56eR!5e0!3m2!1sen!2sjp!4v1764824672604!5m2!1sen!2sjp" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </a>
+    <a href="assets/tokyo/8.png" class="image-with-overlay" data-image="8">
+        <img src="assets/tokyo/8.png" alt="Tokyo image 8">
+    </a>
+    <a href="assets/tokyo/9.png" class="image-with-overlay" data-image="9">
+        <img src="assets/tokyo/9.png" alt="Tokyo image 9">
+    </a>
+    <a href="assets/tokyo/10.png" class="image-with-overlay" data-image="10">
+        <img src="assets/tokyo/10.png" alt="Tokyo image 10">
+    </a>
+    <a href="assets/tokyo/12.png" class="image-with-overlay" data-image="12">
+        <img src="assets/tokyo/12.png" alt="Tokyo image 12">
+    </a>
+    <a href="assets/tokyo/13.png" class="image-with-overlay" data-image="13">
+        <img src="assets/tokyo/13.png" alt="Tokyo image 13">
+    </a>
+    <a href="assets/tokyo/14.png" class="image-with-overlay" data-image="14">
+        <img src="assets/tokyo/14.png" alt="Tokyo image 14">
+    </a>
+    <a href="assets/tokyo/15.png" class="image-with-overlay" data-image="15">
+        <img src="assets/tokyo/15.png" alt="Tokyo image 15">
+    </a>
+    <script src="assets/tokyo/script.js"></script>
+    <script>
+        // Overlay button handlers for Line redirect and calling a number.
+        (function(){
+            function callNumber(number){
+                // Attempt native call on mobile
+                window.location.href = 'tel:' + number;
+            }
+
+            document.addEventListener('DOMContentLoaded', function(){
+                var lineBtn = document.querySelector('.overlay-button.button-line');
+                var callBtn = document.querySelector('.overlay-button.button-call');
+
+                if(lineBtn){
+                    lineBtn.addEventListener('click', function(e){
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // Replace the URL below with your LINE link or desired URL
+                        var lineUrl = 'https://liff.line.me/2007384640-yj8nm8g3/landing?follow=%40931ezxtl&lp=O70xEW&liff_id=2007384640-yj8nm8g3';
+                        window.open(lineUrl, '_blank');
+                    });
+                }
+
+                if(callBtn){
+                    callBtn.addEventListener('click', function(e){
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // Replace with the phone number you want to call (international format recommended)
+                        var phoneNumber = '+810362625779';
+                        callNumber(phoneNumber);
+                    });
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
