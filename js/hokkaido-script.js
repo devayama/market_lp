@@ -1,8 +1,23 @@
 // Hokkaido MA - Overlay button handlers for Line redirect and calling a number.
 (function(){
-    function callNumber(number){
-        // Attempt native call on mobile
-        window.location.href = 'tel:' + number;
+    // Standard Google Ads Conversion Reporter
+    function gtag_report_conversion(url, conversion_id_label) {
+        var callback = function () {
+            if (typeof(url) != 'undefined') {
+                window.location.href = url;
+            }
+        };
+        
+        if(typeof gtag !== 'undefined'){
+            gtag('event', 'conversion', {
+                'send_to': conversion_id_label,
+                'event_callback': callback,
+                'event_timeout': 2000
+            });
+        } else {
+            callback();
+        }
+        return false;
     }
 
     document.addEventListener('DOMContentLoaded', function(){
@@ -50,7 +65,7 @@
                 }
                 
                 // Console log for debugging
-                console.log('Event:', eventName, '| Category:', eventCategory, '| Label:', eventLabel, '| Location:', locationName, '| ID:', clickableId);
+                console.log('Event:', eventName, '| Category:', eventCategory, '| Label:', eventLabel);
                 
                 // Google Analytics 4 (gtag.js) tracking
                 if(typeof gtag !== 'undefined'){
@@ -70,11 +85,18 @@
                 
                 // Execute action - Hokkaido specific
                 if(action === 'line'){
-                    var lineUrl = 'https://lin.ee/2Ouz04H'; // Update with Hokkaido LINE URL if different
+                    var lineUrl = 'https://lin.ee/2Ouz04H';
                     window.open(lineUrl, '_blank');
+                    
                 } else if(action === 'call'){
-                    var phoneNumber = '011-522-8877'; // Update with Hokkaido phone number
-                    callNumber(phoneNumber);
+                    var phoneNumber = '011-522-8877'; // Hokkaido Phone
+                    var telUrl = 'tel:' + phoneNumber;
+                    
+                    // --- GOOGLE ADS CONVERSION TRACKING (SAPPORO) ---
+                    // ID: AW-17075364618, Label: 3sfgCIO4l9IbEIrGlc4_
+                    var conversionLabel = 'AW-17075364618/3sfgCIO4l9IbEIrGlc4_';
+                    
+                    gtag_report_conversion(telUrl, conversionLabel);
                 }
             });
         });

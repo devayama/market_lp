@@ -1,8 +1,23 @@
 // Nagoya MA - Overlay button handlers for Line redirect and calling a number.
 (function(){
-    function callNumber(number){
-        // Attempt native call on mobile
-        window.location.href = 'tel:' + number;
+    // Standard Google Ads Conversion Reporter
+    function gtag_report_conversion(url, conversion_id_label) {
+        var callback = function () {
+            if (typeof(url) != 'undefined') {
+                window.location.href = url;
+            }
+        };
+        
+        if(typeof gtag !== 'undefined'){
+            gtag('event', 'conversion', {
+                'send_to': conversion_id_label,
+                'event_callback': callback,
+                'event_timeout': 2000
+            });
+        } else {
+            callback();
+        }
+        return false;
     }
 
     document.addEventListener('DOMContentLoaded', function(){
@@ -50,7 +65,7 @@
                 }
                 
                 // Console log for debugging
-                console.log('Event:', eventName, '| Category:', eventCategory, '| Label:', eventLabel, '| Location:', locationName, '| ID:', clickableId);
+                console.log('Event:', eventName, '| Category:', eventCategory, '| Label:', eventLabel);
                 
                 // Google Analytics 4 (gtag.js) tracking
                 if(typeof gtag !== 'undefined'){
@@ -70,11 +85,18 @@
                 
                 // Execute action - Nagoya specific
                 if(action === 'line'){
-                    var lineUrl = 'https://lin.ee/JwFowh2'; // Update with Nagoya LINE URL if different
+                    var lineUrl = 'https://lin.ee/JwFowh2';
                     window.open(lineUrl, '_blank');
+                    
                 } else if(action === 'call'){
-                    var phoneNumber = '052-526-9777'; // Update with Nagoya phone number
-                    callNumber(phoneNumber);
+                    var phoneNumber = '052-526-9777'; // Nagoya Phone
+                    var telUrl = 'tel:' + phoneNumber;
+                    
+                    // --- GOOGLE ADS CONVERSION TRACKING (NAGOYA) ---
+                    // ID: AW-17075364618, Label: uVJyCIC4l9IbEIrGlc4_
+                    var conversionLabel = 'AW-17075364618/uVJyCIC4l9IbEIrGlc4_';
+                    
+                    gtag_report_conversion(telUrl, conversionLabel);
                 }
             });
         });

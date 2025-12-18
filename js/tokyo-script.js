@@ -1,8 +1,25 @@
 // Tokyo MA - Overlay button handlers for Line redirect and calling a number.
 (function(){
-    function callNumber(number){
-        // Attempt native call on mobile
-        window.location.href = 'tel:' + number;
+    // Standard Google Ads Conversion Reporter
+    // This function ensures the conversion is tracked before the URL changes/call starts
+    function gtag_report_conversion(url, conversion_id_label) {
+        var callback = function () {
+            if (typeof(url) != 'undefined') {
+                window.location.href = url;
+            }
+        };
+        
+        if(typeof gtag !== 'undefined'){
+            gtag('event', 'conversion', {
+                'send_to': conversion_id_label,
+                'event_callback': callback,
+                'event_timeout': 2000 // Fallback if callback fails
+            });
+        } else {
+            // If gtag is not loaded for some reason, just call immediately
+            callback();
+        }
+        return false;
     }
 
     document.addEventListener('DOMContentLoaded', function(){
@@ -50,7 +67,7 @@
                 }
                 
                 // Console log for debugging
-                console.log('Event:', eventName, '| Category:', eventCategory, '| Label:', eventLabel, '| Location:', locationName, '| ID:', clickableId);
+                console.log('Event:', eventName, '| Category:', eventCategory, '| Label:', eventLabel);
                 
                 // Google Analytics 4 (gtag.js) tracking
                 if(typeof gtag !== 'undefined'){
@@ -63,18 +80,22 @@
                     });
                 }
                 
-                // Universal Analytics (analytics.js) tracking - for backwards compatibility
-                if(typeof ga !== 'undefined'){
-                    ga('send', 'event', eventCategory, eventName, eventLabel);
-                }
-                
-                // Execute action - Tokyo specific
+                // Execute action
                 if(action === 'line'){
-                    var lineUrl = 'https://lin.ee/bX6wERC';
+                    // Tokyo LINE URL
+                    var lineUrl = 'https://lin.ee/bX6wERC'; 
                     window.open(lineUrl, '_blank');
+
                 } else if(action === 'call'){
                     var phoneNumber = '03-6262-5779'; // Tokyo phone number
-                    callNumber(phoneNumber);
+                    var telUrl = 'tel:' + phoneNumber;
+                    
+                    // --- GOOGLE ADS CONVERSION TRACKING (TOKYO) ---
+                    // ID: AW-17075364618, Label: l_x-CP23l9IbEIrGlc4_
+                    var conversionLabel = 'AW-17075364618/l_x-CP23l9IbEIrGlc4_';
+                    
+                    // This function fires the tag, then calls the number
+                    gtag_report_conversion(telUrl, conversionLabel);
                 }
             });
         });
