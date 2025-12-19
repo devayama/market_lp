@@ -85,7 +85,7 @@
                 
                 // Execute action - Nagoya specific
                 if(action === 'line'){
-                    var lineUrl = 'https://lin.ee/JwFowh2';
+                    var lineUrl = 'https://liff.line.me/2007384640-yj8nm8g3/landing?follow=%40931ezxtl&lp=dmcDf2&liff_id=2007384640-yj8nm8g3';
                     window.open(lineUrl, '_blank');
                     
                 } else if(action === 'call'){
