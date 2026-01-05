@@ -70,7 +70,7 @@
                 
                 // Execute action - Fukuoka specific
                 if(action === 'line'){
-                    var lineUrl = 'https://liff.line.me/2007384640-yj8nm8g3/landing?follow=%40931ezxtl&lp=xk25q5&liff_id=2007384640-yj8nm8g3'; // Update with Fukuoka LINE URL if different
+                    var lineUrl = 'https://liff.line.me/2007384640-yj8nm8g3/landing?follow=%40931ezxtl&lp=ydkUbr&liff_id=2007384640-yj8nm8g3'; // Update with Fukuoka LINE URL if different
                     window.open(lineUrl, '_blank');
                 } else if(action === 'call'){
                     var phoneNumber = '092-724-1212'; // Update with Fukuoka phone number
