@@ -5,6 +5,26 @@
         window.location.href = 'tel:' + number;
     }
 
+    // Google Ads conversion tracking for click-to-call
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      if(typeof gtag !== 'undefined'){
+        gtag('event', 'conversion', {
+            'send_to': 'AW-17075364618/mYdHCPrp9dwbEIrGlc4_',
+            'value': 1.0,
+            'currency': 'JPY',
+            'event_callback': callback
+        });
+      } else {
+        callback();
+      }
+      return false;
+    }
+
     document.addEventListener('DOMContentLoaded', function(){
         // Disable anchor link clicks on all images to prevent opening
         var allAnchors = document.querySelectorAll('a');
@@ -74,7 +94,8 @@
                     window.open(lineUrl, '_blank');
                 } else if(action === 'call'){
                     var phoneNumber = '092-724-1212'; // Update with Fukuoka phone number
-                    callNumber(phoneNumber);
+                    var telUrl = 'tel:' + phoneNumber;
+                    gtag_report_conversion(telUrl);
                 }
             });
         });
